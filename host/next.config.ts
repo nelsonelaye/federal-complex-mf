@@ -5,6 +5,7 @@ import { NextFederationPlugin } from "@module-federation/nextjs-mf";
 // execute start script
 
 // nextjs-mf only supports 'pages' directory
+const URL = process.env.REMOTE_URL || "http://localhost:3001";
 
 const nextConfig: NextConfig = {
   /* config options here */
@@ -15,7 +16,7 @@ const nextConfig: NextConfig = {
         name: "host",
         filename: "static/chunks/remoteEntry.js",
         remotes: {
-          remote: `remote@http://localhost:3001/_next/static/${
+          remote: `remote@${URL}/_next/static/${
             isServer ? "ssr" : "chunks"
           }/remoteEntry.js`,
         },

@@ -4,6 +4,8 @@ const { NextFederationPlugin } = require("@module-federation/nextjs-mf");
 // build the project first before
 // execute start script
 
+const URL = process.env.HOST_URL || "http://localhost:3000";
+
 const nextConfig: NextConfig = {
   webpack: (config, options) => {
     const { isServer } = options;
@@ -12,7 +14,7 @@ const nextConfig: NextConfig = {
         name: "remote",
         filename: "static/chunks/remoteEntry.js",
         remotes: {
-          host: `host@http://localhost:3000/_next/static/${
+          host: `host@${URL}/_next/static/${
             isServer ? "ssr" : "chunks"
           }/remoteEntry.js`,
         },
